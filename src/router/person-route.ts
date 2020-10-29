@@ -1,6 +1,9 @@
 import { Person } from "../models/person.model";
 // import * as personDao from "../dao/person-dao";
-import * as personService from '../services/person-service'
+import * as personService from "../services/person-service";
+import * as requester from "../handlers/requester";
+import { product } from "../dao/mongo-schemas/product-schema";
+import { Requester } from "../models/requester";
 
 export const createPerson = async (req: any, res: any) => {
   try {
@@ -46,6 +49,21 @@ export const deletePerson = async (req: any, res: any) => {
     let id = req.params.id;
     const result = await personService.deletePerson(id);
     res.send(result);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
+
+export const getProdutos = async (req: any, res: any) => {
+  try {
+    let params = {
+      host: 'localhost',
+      path: '/produtos',
+      port: '8085',
+      method: 'GET',
+    } as Requester;
+    let products = await requester.REQUEST(params);
+    res.send(products)
   } catch (error) {
     res.status(404).send(error.message);
   }
