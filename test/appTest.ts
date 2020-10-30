@@ -1,7 +1,5 @@
 import { expect, assert } from "chai";
-import * as request from "request";
 import { addNumbers, hello } from "../src/app";
-import { product } from "../src/dao/mongo-schemas/product-schema";
 import * as requester from "../src/handlers/requester";
 import { Requester } from "../src/models/requester";
 
